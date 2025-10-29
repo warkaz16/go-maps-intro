@@ -11,7 +11,11 @@ func getVisits(m map[string]int, day string) (int, bool) {
 }
 
 func clone(src map[string]int) map[string]int {
-	m := src
+	m := make(map[string]int)
+	// maps.Copy(m, src)
+	for k, v := range src {
+		m[k] = v
+	}
 	return m
 }
 
@@ -124,10 +128,10 @@ func main() {
 	fmt.Println(b)
 	// в обеих картах 99 потому что значение в картах не копируется а напрямую ссылается в источник
 
-	clone(b)
-	b["Mon"] = 990 // независимая копия - не меняет оригинал
-	fmt.Println(b)
-
+	c := clone(b)
+	c["Mon"] = 9900 // независимая копия - не меняет оригинал
+	fmt.Println("клон -", c)
+	fmt.Println("старый -",a)
 	// Подзадача 9 — счётчик слов
 
 	fmt.Println("\n====\\ Подзадача 9 /====")
